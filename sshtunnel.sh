@@ -62,7 +62,7 @@ if [[ $node = "grizzly1" ]]; then
    echo "   Hostname 10.1.2.45" >> /etc/ssh/ssh_config
    echo "   StrictHostKeyChecking no" >> /etc/ssh/ssh_config
    echo "   UserKnownHostsFile=/dev/null" >> /etc/ssh/ssh_config
-elif [[ $node = "grizzly2" ]]; then
+elif [[ $node = "horizon2" ]]; then
    # Boot into grizzly2 and authorize public keys
    if [ ! -d "~root/.ssh" ]; then
        echo "Create root SSH directory to allow public keys."
@@ -73,16 +73,16 @@ elif [[ $node = "grizzly2" ]]; then
        sudo cat /vagrant/.ssh/id_rsa2.pub >> ~root/.ssh/authorized_keys
    fi
    # Disable strict host key checking
-   echo "Host grizzly1" >> /etc/ssh/ssh_config
+   echo "Host horizon1" >> /etc/ssh/ssh_config
    echo "   Hostname 10.1.2.44" >> /etc/ssh/ssh_config
    echo "   StrictHostKeyChecking no" >> /etc/ssh/ssh_config
    echo "   UserKnownHostsFile=/dev/null" >> /etc/ssh/ssh_config
    # Add grizzly1 to list of known hosts
    sudo ssh-keyscan -t rsa 10.1.2.44 >> ~/.ssh/known_hosts
    sudo ssh-keyscan -t rsa 10.1.2.45 >> ~/.ssh/known_hosts
-   # SSH into grizzly1 and authorize public keys
-   sshpass -p "vagrant" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t -t vagrant@grizzly1 <<EOF
-echo "SSH into grizzly1"
+   # SSH into horizon1 and authorize public keys
+   sshpass -p "vagrant" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t -t vagrant@horizon <<EOF
+echo "SSH into horizon1"
 sudo su -
 if [ ! -d "~root/.ssh" ];
 then

@@ -231,7 +231,7 @@ sudo sed -i 's/=no/=yes/' /etc/default/corosync
 sudo cp /vagrant/corosync.conf /etc/corosync/corosync.conf
 
 #exit 0
-#sed -i -e 's/exit 0/losetup \/dev\/loop2 \/var\/lib\/cinder\/volumes \nexit 0/g' /etc/rc.local
+#sed -i -e 's/exit 0/losetup \/dev\/loop2 \/var\/lib\/cinde\/rvolumes \nexit 0/g' /etc/rc.local
 #exit 0
 
 #exit 0

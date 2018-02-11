@@ -22,7 +22,6 @@ Vagrant.configure("2") do |config|
   config.vm.define :grizzly1 do |grizzly1_config|
 
     grizzly1_config.vm.box = "hashicorp/precise64"
-    # grizzly1_config.vm.box_url = "https://www.dropbox.com/s/dln3v7nf8nwhf72/package.box"
     grizzly1_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
     # grizzly1_config.vm.boot_mode = :gui
@@ -56,8 +55,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :grizzly2 do |grizzly2_config|
 
     grizzly2_config.vm.box = "precise64_with_services"
-    grizzly2_config.vm.box_url = "https://www.dropbox.com/s/dln3v7nf8nwhf72/package.box"
-    #grizzly2_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+    grizzly2_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
     # grizzly1_config.vm.boot_mode = :gui
     grizzly2_config.vm.network :hostonly, "10.1.2.45"
