@@ -2,8 +2,8 @@
 
 #sudo su -
 apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
 
+DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy dist-upgrade
 
 #apt-get dist-upgrade -y
@@ -74,8 +74,8 @@ echo "flavor = keystone" >> /etc/glance/glance-api.conf
 sed -i -e 's/sql_connection = sqlite:\/\/\/\/var\/lib\/glance\/glance.sqlite/sql_connection = mysql:\/\/glanceUser:glancePass@10.1.2.44\/glance/g' /etc/glance/glance-registry.conf
 echo "flavor = keystone" >> /etc/glance/glance-registry.conf
 service glance-api restart; service glance-registry restart
-glance-manage db_sync
 
+glance-manage db_sync
 glance image-create --name myFirstImage --is-public true --container-format bare --disk-format qcow2 --location https://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-disk.img
 
 mysql -u root <<EOF

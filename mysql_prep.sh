@@ -18,14 +18,9 @@ sudo mount -t xfs -o noatime,nodiratime,attr2 /dev/VG_PG/LV_DATA /db/mysql
 sudo chown -hR mysql:mysql /db/mysql/
 sudo cp /etc/mysql/my.cnf /etc/mysql/myold.cnf
 sudo sed -i -e 's/\/var\/lib\/mysql/\/db\/mysql\/mysql/g' /etc/mysql/my.cnf
-
 sudo cp -aR /var/lib/mysql /db/mysql/
-
 sudo mv /etc/mysql/my.cnf /db/mysql/mysql
-
 sudo ln -s /db/mysql/mysql/my.cnf /etc/mysql/my.cnf
-
-
 
 sudo sed -i -e 's/\/system\/cpu\/ r,/\/system\/cpu\/ r,\n  \/db\/mysql\/mysql\/ r,\n  \/db\/mysql\/mysql\/** rwk,/g' /etc/apparmor.d/usr.sbin.mysqld
 
@@ -42,7 +37,6 @@ sshpass -p "vagrant" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyCheckin
 echo "SSH into grizzly1"
 
 sudo mysql_install_db --datadir=/db/mysql/mysql --user=mysql
-
 sudo service mysql start
 
 mysql -u root <<TEST
@@ -52,10 +46,8 @@ CREATE TABLE users (id INTEGER(9), name VARCHAR(255));
 TEST
 
 sudo service mysql stop
-
 sudo umount /db/mysql
-
-sudo vgchange -an VG_PG  
+sudo vgchange -an VG_PG 
 
 sudo drbdadm --force secondary mysql
 
@@ -72,13 +64,10 @@ sudo cp /etc/mysql/my.cnf /etc/mysql/myold.cnf
 sudo sed -i -e 's/\/var\/lib\/mysql/\/db\/mysql\/mysql/g' /etc/mysql/my.cnf
 
 sudo cp -aR /var/lib/mysql /db/mysql/
-
 sudo mv /etc/mysql/my.cnf /db/mysql/mysql
-
 sudo ln -s /db/mysql/mysql/my.cnf /etc/mysql/my.cnf
 
 sudo service mysql start
-
 sudo service mysql stop
 
 sudo update-rc.d mysql defaults

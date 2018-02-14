@@ -2,15 +2,11 @@ node=$(hostname)
 node=$(echo $node)
 echo "$node is active."
 
-
 if [[ $node = "grizzly2" ]]; then
 sudo scp /vagrant/mysql.res /etc/drbd.d/mysql.res
 
-
 echo "Disabling DRBD autostart"
 sudo update-rc.d drbd disable
-
-
 
 echo "Creating DRBD Metadata"
 yes yes | sudo drbdadm create-md mysql
@@ -45,7 +41,6 @@ exit
 EOF
 
 sudo service drbd start
-
 
 numLines=40
 timeToSleep=5

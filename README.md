@@ -31,8 +31,6 @@ puppet module install puppetlabs-mysql --version 5.2.1
 puppet module install openstack-nova --version 9.4.0
 puppet module install puppetlabs-lvm --version 1.0.0
 
-
-
 ```
 
 Add this for to your Puppetfile: 
@@ -45,13 +43,10 @@ mod 'puppet-letsencrypt', '2.2.0'
 mod 'openstack-nova', '9.4.0'
 mod 'puppetlabs-lvm', '1.0.0'
 
-
 ```
 
-
 Now you can access the OpenStack-Dashboard with your web browser by tiping the URL "http://192.168.22.11/horizon".
-Login with user name "admin" and password "admin_pass". 
-Have fun!
+Login with user name "admin" and password "admin_pass".
 
 **Sources:**
 * [Puppet Forge](https://forge.puppet.com/)
@@ -62,4 +57,3 @@ Have fun!
 * [Puppet Modul for letsencrypt](https://forge.puppet.com/puppet/letsencrypt )
 * [Puppet Modul for OpenStack Nova] (https://forge.puppet.com/openstack/nova)
 * [Puppte Modul for lvm ](https://forge.puppet.com/puppetlabs/lvm)
-* []()
