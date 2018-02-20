@@ -1,24 +1,21 @@
 #!/bin/sh
 #
 # Keystone basic Endpoints
-
 # Mainly inspired by https://github.com/openstack/keystone/blob/master/tools/sample_data.sh
-
 # Modified by Bilel Msekni / Institut Telecom
 #
 # Support: openstack@lists.launchpad.net
 # License: Apache Software License (ASL) 2.0
 #
-
 # Host address
-HOST_IP=10.1.2.44
-EXT_HOST_IP=192.168.22.11
+HOST_IP="10.1.2.44"
+EXT_HOST_IP="192.168.22.11"
 
 # MySQL definitions
-MYSQL_USER=keystoneUser
-MYSQL_DATABASE=keystone
-MYSQL_HOST=$HOST_IP
-MYSQL_PASSWORD=keystonePass
+MYSQL_USER="keystoneUser"
+MYSQL_DATABASE="keystone"
+MYSQL_HOST="$HOST_IP"
+MYSQL_PASSWORD="keystonePass"
 
 # Keystone definitions
 KEYSTONE_REGION=RegionOne

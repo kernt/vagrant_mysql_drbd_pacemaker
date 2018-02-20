@@ -5,10 +5,12 @@
 # Mainly inspired by https://github.com/openstack/keystone/blob/master/tools/sample_data.sh
 
 # Modified by Bilel Msekni / Institut Telecom
+
 #
 # Support: openstack@lists.launchpad.net
 # License: Apache Software License (ASL) 2.0
 #
+
 HOST_IP=10.1.2.44
 ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin_pass}
 SERVICE_PASSWORD=${SERVICE_PASSWORD:-service_pass}

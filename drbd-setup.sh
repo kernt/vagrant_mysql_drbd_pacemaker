@@ -1,3 +1,5 @@
+#!/bin/bash
+
 node=$(hostname)
 node=$(echo $node)
 echo "$node is active."

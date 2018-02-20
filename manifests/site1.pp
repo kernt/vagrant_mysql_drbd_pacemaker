@@ -19,8 +19,13 @@ exec { "apt-update":
     command => "/usr/bin/apt-get update"
 }
 
-Exec["apt-update"] -> Package <| |>
+exec { "apt-upgrade":
+	command => "/usr/bin/apt-get upgrade"
+}
 
+
+
+Exec["apt-update"] -> Package <| |>
 
 	#ensure git is installed
 	package { 'git':
@@ -46,7 +51,6 @@ Exec["apt-update"] -> Package <| |>
 	package { 'ceph-common':
 		ensure 		=> 'present',
 	}
-
 
 	#ensure ubuntu is prepared
 	package { 'ubuntu-cloud-keyring':
@@ -75,7 +79,6 @@ Exec["apt-update"] -> Package <| |>
 	package { 'ntp':
 		ensure 		=> 'present',
 	}
-
 
 	#ensure networking utils are installed
 	package { 'vlan':
@@ -236,7 +239,6 @@ Exec["apt-update"] -> Package <| |>
 	}
 
 #sudo apt-get install pacemaker corosync cluster-glue fence-agents resource-agents
-
 	
 #python-keystone python-keystoneclient
 #sudo apt-get install glance glance-api glance-client glance-common glance-registry python-glance
@@ -280,4 +282,9 @@ Exec["apt-update"] -> Package <| |>
     #command => "/home/vagrant/devstack/stack.sh"
 
 	#}
+}
+
+
+exec { "clear-sreen":
+	command => "/usr/bin/clear"
 }

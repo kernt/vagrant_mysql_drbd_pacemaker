@@ -1,4 +1,7 @@
+#!/bin/bash
 #Update /etc/hosts (list of known hosts)
+clear
+
 echo '192.168.22.11    grizzly1 grizzly1 precise64' >> /etc/hosts
 echo '192.168.22.12    grizzly2 grizzly2 precise64' >> /etc/hosts
 echo '10.1.2.44       grizzly1 grizzly1 precise64' >> /etc/hosts

@@ -1,3 +1,6 @@
+#!/bin/bash
+reset 
+
 node=$(hostname)
 node=$(echo $node)
 echo "$node is active."

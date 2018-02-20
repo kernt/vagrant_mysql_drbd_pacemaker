@@ -19,9 +19,11 @@ exec { "apt-update":
     command => "/usr/bin/apt-get update"
 }
 
+exec { "apt-upgrade":
+	command => "/usr/bin/apt-get upgrade"
+}
+
 Exec["apt-update"] -> Package <| |>
-
-
 
 	#ensure git is installed
 	package { 'git':
@@ -75,7 +77,6 @@ Exec["apt-update"] -> Package <| |>
 	package { 'ntp':
 		ensure 		=> 'present',
 	}
-
 
 	#ensure networking utils are installed
 	package { 'vlan':

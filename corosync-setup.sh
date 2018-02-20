@@ -1,7 +1,8 @@
+#!/bin/bash
+
 node=$(hostname)
 node=$(echo $node)
 echo "$node is active."
-
 
 if [[ $node = "grizzly2" ]]; then
 

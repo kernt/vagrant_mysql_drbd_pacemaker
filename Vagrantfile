@@ -19,36 +19,25 @@
 # https://www.vagrantup.com/docs/provisioning/puppet_apply.html
 Vagrant.configure("2") do |config|
 
-  config.vm.define :grizzly1 do |grizzly1_config|
+ config.vm.define :grizzly1 do |grizzly1_config|
 
     grizzly1_config.vm.box = "hashicorp/precise64"
     grizzly1_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-    # grizzly1_config.vm.boot_mode = :gui
-    grizzly1_config.vm.network :hostonly, "10.1.2.44"
-    #grizzly1_config.vm.network :bridged, "192.168.22.11"
-    grizzly1_config.vm.network :hostonly, "192.168.22.11"
-    #grizzly1_config.vm.network :bridged, "192.168.22.11"
-    grizzly1_config.vm.host_name = "grizzly1"
-    grizzly1_config.vm.customize ["modifyvm", :id, "--memory", 1024]
-    grizzly1_config.ssh.max_tries = 100
-    grizzly1_config.vm.forward_port 80, 8088
-    grizzly1_config.vm.forward_port 22, 2223
-    #grizzly1_config.persistent_storage.location = "~/development/sourcehdd1.vdi"
-    #grizzly1_config.persistent_storage.size = 50000
 
+    grizzly1_config.vm.network :private_network, ip:  "10.1.2.44" 
+    grizzly1_config.vm.network :private_network, ip: "192.168.22.11"
+    grizzly1_config.vm.host_name = "grizzly1"
+    #grizzly1_config.vm.customize ["modifyvm", :id, "--memory", 1024]
+    grizzly1_config.vm.network "forwarded_port", guest: 80, host: 8088
+    grizzly1_config.vm.network "forwarded_port", guest: 22, host: 2223
     grizzly1_config.vm.provision :shell, :path => "prep.sh"
-    
-    grizzly1_config.vm.provision :puppet do |grizzly1_puppet|
-      grizzly1_puppet.temp_dir = "/tmp/vagrant-puppet"
-      grizzly1_puppet.module_path = "modules"
-      grizzly1_puppet.manifests_path = "manifests"
-      grizzly1_puppet.manifest_file = "site1.pp"
-      #grizzly1_puppet.puppet.hiera_config_path = "hiera.yaml"
-      #grizzly1_puppet.puppet.working_directory = "/tmp/vagrant-puppet"
-      grizzly1_puppet.facter = {
-         "fqdn" => "grizzly1" 
-        }
-    end
+    grizzly1_config.vm.provision "puppet" do |grizzly1_puppet|
+    	grizzly1_puppet.temp_dir = "/tmp/vagrant-puppet"
+    	grizzly1_puppet.module_path = "modules"
+    	grizzly1_puppet.manifests_path = "manifests"
+    	grizzly1_puppet.manifest_file = "site1.pp"
+     	grizzly1_puppet.facter = { "fqdn" => "grizzly1" }
+    	end
 
     #grizzly1_config.vm.provision :shell, :path => "script.sh"
     grizzly1_config.vm.provision :shell, :path => "lvm-setup.sh"
@@ -56,36 +45,29 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :grizzly2 do |grizzly2_config|
+
     grizzly2_config.vm.box = "precise64_with_services"
     grizzly2_config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-    # grizzly1_config.vm.boot_mode = :gui
-    grizzly2_config.vm.network :hostonly, "10.1.2.45"
+
+    grizzly2_config.vm.network :private_network, ip:  "10.1.2.45"
     #grizzly1_config.vm.network :bridged, "192.168.22.11"
-    grizzly2_config.vm.network :hostonly, "192.168.22.12"
+    grizzly2_config.vm.network :private_network, ip: "192.168.22.12"
     #grizzly1_config.vm.network :bridged, "192.168.22.11"
     grizzly2_config.vm.host_name = "grizzly2"
-    grizzly2_config.vm.customize ["modifyvm", :id, "--memory", 1024]
-    grizzly2_config.ssh.max_tries = 100
-    grizzly2_config.vm.forward_port 80, 8089
-    grizzly2_config.vm.forward_port 22, 2224
-
-    #grizzly2_config.persistent_storage.location = "~/development/sourcehdd2.vdi"
-    #grizzly2_config.persistent_storage.size = 50000
+    #grizzly2_config.vm.customize ["modifyvm", :id, "--memory", 1024]
+    #grizzly2_config.ssh.max_tries = 100
+    grizzly2_config.vm.network "forwarded_port", guest: 80, host: 8089
+    grizzly2_config.vm.network "forwarded_port", guest: 22, host: 2224
 
     grizzly2_config.vm.provision :shell, :path => "prep.sh"
-    grizzly2_config.vm.provision :puppet do |grizzly2_puppet|
+    grizzly2_config.vm.provision "puppet" do |grizzly2_puppet|
       grizzly2_puppet.temp_dir = "/tmp/vagrant-puppet"
       grizzly2_puppet.module_path = "modules"
       grizzly2_puppet.manifests_path = "manifests"
       grizzly2_puppet.manifest_file = "site2.pp"
-      #grizzly2_puppet.puppet.hiera_config_path = "hiera.yaml"
-      #grizzly2_puppet.puppet.working_directory = "/tmp/vagrant-puppet"
-      grizzly2_puppet.facter = {
-         "fqdn" => "grizzly2"
-        }
+      grizzly2_puppet.facter = { "fqdn" => "grizzly2" }
     end
 
-    #grizzly2_config.vm.provision :shell, :path => "script.sh"
     grizzly2_config.vm.provision :shell, :path => "lvm-setup.sh"
     grizzly2_config.vm.provision :shell, :path => "sshtunnel.sh"
     grizzly2_config.vm.provision :shell, :path => "corosync-setup.sh"
@@ -93,4 +75,5 @@ Vagrant.configure("2") do |config|
     grizzly2_config.vm.provision :shell, :path => "mysql_prep.sh"
     grizzly2_config.vm.provision :shell, :path => "pacemaker-prepare.sh"
   end
+
 end
