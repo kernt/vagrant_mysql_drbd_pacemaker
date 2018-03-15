@@ -23,10 +23,12 @@ exec { "apt-upgrade":
 	command => "/usr/bin/apt-get upgrade"
 }
 
-
-
 Exec["apt-update"] -> Package <| |>
-
+	#ensure virtualbox-guest-dkms is installed
+	package { 'virtualbox-guest-dkms':
+		ensure 		=> 'present',
+	}
+	
 	#ensure git is installed
 	package { 'git':
 		ensure 		=> 'present',
@@ -283,7 +285,6 @@ Exec["apt-update"] -> Package <| |>
 
 	#}
 }
-
 
 exec { "clear-sreen":
 	command => "/usr/bin/clear"

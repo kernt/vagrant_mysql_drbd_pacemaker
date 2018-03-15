@@ -13,6 +13,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+
+# puppet 
 node /^grizzly2/ {
 
 exec { "apt-update":
@@ -24,7 +26,10 @@ exec { "apt-upgrade":
 }
 
 Exec["apt-update"] -> Package <| |>
-
+	#ensure virtualbox-guest-dkms is installed
+	package { 'virtualbox-guest-dkms':
+		ensure 		=> 'present',
+	}
 	#ensure git is installed
 	package { 'git':
 		ensure 		=> 'present',

@@ -1,4 +1,5 @@
 #!/bin/bash
+reset
 # https://www.ubuntu.com/openstack
 # sudo echo deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/horizon main >> /etc/apt/sources.list.d/horizon.list
 sudo echo deb http://ubuntu-cloud.archive.canonical.com/ubuntu precise-updates/grizzly main >> /etc/apt/sources.list.d/grizzly.list
